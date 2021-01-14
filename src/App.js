@@ -1,25 +1,65 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import ReactFlow, { isNode } from "react-flow-renderer";
+import dagre from "dagre";
 
-function App() {
+import { initialElements } from "./elements";
+
+import "./App.css";
+
+const dagreGraph = new dagre.graphlib.Graph();
+dagreGraph.setDefaultEdgeLabel(() => ({}));
+const direction = "LR";
+const isHorizontal = direction === "LR";
+dagreGraph.setGraph({
+  rankdir: direction,
+  ranksep: 150,
+  marginx: 50,
+  marginy: 50,
+});
+
+initialElements.forEach((el) => {
+  if (isNode(el)) {
+    dagreGraph.setNode(el.id, { width: 5, height: 5 });
+  } else {
+    dagreGraph.setEdge(el.source, el.target);
+  }
+});
+
+dagre.layout(dagreGraph);
+
+console.log("dagreGraph", dagreGraph);
+
+const layoutedElements = initialElements.map((el) => {
+  if (isNode(el)) {
+    const nodeWithPosition = dagreGraph.node(el.id);
+    el.targetPosition = isHorizontal ? "left" : "top";
+    el.sourcePosition = isHorizontal ? "right" : "bottom";
+    el.position = {
+      x: nodeWithPosition.x,
+      y: nodeWithPosition.y,
+    };
+  }
+
+  return el;
+});
+
+const LayoutFlow = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ width: "100%", height: "500px" }}>
+      <ReactFlow
+        elements={layoutedElements}
+        elementsSelectable={false}
+        nodesConnectable={false}
+        nodesDraggable={false}
+        zoomOnScroll={false}
+        panOnScroll={false}
+        panOnScrollMode={false}
+        zoomOnDoubleClick={false}
+        paneMoveable={false}
+      ></ReactFlow>
+      ;
     </div>
   );
-}
+};
 
-export default App;
+export default LayoutFlow;

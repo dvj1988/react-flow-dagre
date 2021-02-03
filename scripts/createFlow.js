@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 
 const nanoid = () => Math.random().toString(36).substr(2);
-const NUMBER_OF_CONNECTIONS = 45;
+const NUMBER_OF_CONNECTIONS = 50;
 
 const getRandomElement = (items = []) =>
   items[Math.floor(Math.random() * items.length)];
@@ -54,10 +54,12 @@ const nodeEdgesConfigMap = {
 class Node {
   constructor(type) {
     this.id = nanoid();
-    this.type = type;
+    this.nodeType = type;
     this.position = NODE_POSITION;
     this.elementType = ELEMENT_TYPE_MAP.NODE;
     this.quantity = getRandomNumber(1000);
+    this.type = "default";
+    this.data = { label: "" };
   }
 
   setNodeType(type) {
@@ -65,12 +67,13 @@ class Node {
   }
 
   toJS() {
-    const { id, data, position, type, elementType, quantity } = this;
+    const { id, data, position, nodeType, elementType, quantity, type } = this;
     return {
       id,
       data,
       position,
       type,
+      nodeType,
       elementType,
       quantity,
     };
@@ -83,6 +86,8 @@ class Edge {
     this.source = source;
     this.target = target;
     this.elementType = ELEMENT_TYPE_MAP.EDGE;
+    this.type = "straight";
+    this.arrowHeadType = "arrow";
   }
 
   setSource(source) {
@@ -94,79 +99,31 @@ class Edge {
   }
 
   toJS() {
-    const { id, source, target, elementType } = this;
+    const { id, source, target, elementType, type, arrowHeadType } = this;
     return {
       id,
       source,
       target,
       elementType,
+      type,
+      arrowHeadType,
     };
   }
 }
 
 const SEED_NODES = [
-  {
-    id: nanoid(),
-    position: NODE_POSITION,
-    type: NODE_TYPES.SOURCE,
-    elementType: ELEMENT_TYPE_MAP.NODE,
-    quantity: getRandomNumber(1000),
-  },
-  {
-    id: nanoid(),
-    position: NODE_POSITION,
-    type: NODE_TYPES.FACTORY,
-    elementType: ELEMENT_TYPE_MAP.NODE,
-    quantity: getRandomNumber(1000),
-  },
-  {
-    id: nanoid(),
-    position: NODE_POSITION,
-    type: NODE_TYPES.WAREHOUSE,
-    elementType: ELEMENT_TYPE_MAP.NODE,
-    quantity: getRandomNumber(1000),
-  },
-  {
-    id: nanoid(),
-    position: NODE_POSITION,
-    type: NODE_TYPES.DC,
-    elementType: ELEMENT_TYPE_MAP.NODE,
-    quantity: getRandomNumber(1000),
-  },
-  {
-    id: nanoid(),
-    position: NODE_POSITION,
-    type: NODE_TYPES.RETAILER,
-    elementType: ELEMENT_TYPE_MAP.NODE,
-    quantity: getRandomNumber(1000),
-  },
+  new Node(NODE_TYPES.SOURCE),
+  new Node(NODE_TYPES.FACTORY),
+  new Node(NODE_TYPES.WAREHOUSE),
+  new Node(NODE_TYPES.DC),
+  new Node(NODE_TYPES.RETAILER),
 ];
 
 const SEED_EDGES = [
-  {
-    id: "e12",
-    source: SEED_NODES[0].id,
-    target: SEED_NODES[1].id,
-    elementType: ELEMENT_TYPE_MAP.EDGE,
-  },
-  {
-    id: "e23",
-    source: SEED_NODES[1].id,
-    target: SEED_NODES[2].id,
-    elementType: ELEMENT_TYPE_MAP.EDGE,
-  },
-  {
-    id: "e34",
-    source: SEED_NODES[2].id,
-    target: SEED_NODES[3].id,
-    elementType: ELEMENT_TYPE_MAP.EDGE,
-  },
-  {
-    id: "e45",
-    source: SEED_NODES[3].id,
-    target: SEED_NODES[4].id,
-    elementType: ELEMENT_TYPE_MAP.EDGE,
-  },
+  new Edge(SEED_NODES[0].id, SEED_NODES[1].id),
+  new Edge(SEED_NODES[1].id, SEED_NODES[2].id),
+  new Edge(SEED_NODES[2].id, SEED_NODES[3].id),
+  new Edge(SEED_NODES[3].id, SEED_NODES[4].id),
 ];
 
 (async () => {
@@ -175,13 +132,13 @@ const SEED_EDGES = [
 
   for (let i = 0; i < NUMBER_OF_CONNECTIONS; i++) {
     const newNode = new Node(getRandomElement(nodeTypes));
-    const { origins, destinations } = nodeEdgesConfigMap[newNode.type];
+    const { origins, destinations } = nodeEdgesConfigMap[newNode.nodeType];
 
     if (origins.length) {
       const edge = new Edge();
       const originType = getRandomElement(origins);
       const randomOriginNode = getRandomElement(
-        nodes.filter(({ type }) => type === originType)
+        nodes.filter(({ nodeType }) => nodeType === originType)
       );
 
       edge.setSource(randomOriginNode.id);
@@ -194,7 +151,7 @@ const SEED_EDGES = [
       const edge = new Edge();
       const destinationType = getRandomElement(destinations);
       const randomDestinationNode = getRandomElement(
-        nodes.filter(({ type }) => type === destinationType)
+        nodes.filter(({ nodeType }) => nodeType === destinationType)
       );
       edge.setSource(newNode.id);
       edge.setTarget(randomDestinationNode.id);
@@ -206,7 +163,7 @@ const SEED_EDGES = [
   }
 
   fs.writeFile(
-    path.resolve(`${__dirname}/nodes_${nodes.length}.json`),
+    path.resolve(`${__dirname}/flow_${nodes.length}.json`),
     JSON.stringify([...nodes, ...edges]),
     (err) => {
       if (err) {

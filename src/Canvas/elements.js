@@ -1,12 +1,5 @@
 const position = { x: 0, y: 0 };
 const edgeType = "straight";
-const style = {
-  width: 5,
-  height: 5,
-  borderRadius: "50%",
-  background: "red",
-  border: "none",
-};
 
 const labelStyle = {
   width: 30,
@@ -16,68 +9,7 @@ const labelStyle = {
   justifyContent: "flex-end",
 };
 
-export const initialElements = [
-  {
-    id: "1",
-    data: { label: "" },
-    position,
-    style,
-  },
-  {
-    id: "2",
-    data: { label: "" },
-    position,
-    style,
-  },
-  {
-    id: "e12",
-    source: "1",
-    target: "2",
-    type: edgeType,
-    arrowHeadType: "arrow",
-  },
-
-  {
-    id: "3",
-    data: { label: "" },
-    position,
-    style,
-  },
-  {
-    id: "e23",
-    source: "2",
-    target: "3",
-    type: edgeType,
-    arrowHeadType: "arrow",
-  },
-
-  {
-    id: "4",
-    data: { label: "" },
-    position,
-    style,
-  },
-  {
-    id: "e34",
-    source: "3",
-    target: "4",
-    type: edgeType,
-    arrowHeadType: "arrow",
-  },
-
-  {
-    id: "5",
-    data: { label: "" },
-    position,
-    style,
-  },
-  {
-    id: "e45",
-    source: "4",
-    target: "5",
-    type: edgeType,
-    arrowHeadType: "arrow",
-  },
+export const labelNodes = [
   {
     id: "7",
     data: { label: "Sourcing" },
@@ -108,7 +40,9 @@ export const initialElements = [
     position,
     style: labelStyle,
   },
+];
 
+export const labelEdges = [
   {
     id: "e78",
     source: "7",

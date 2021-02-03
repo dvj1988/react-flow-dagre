@@ -1,0 +1,17 @@
+.layoutflow {
+  flex-grow: 1;
+  position: relative;
+}
+
+.layoutflow .controls {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 10;
+}
+
+.react-flow__node-default .react-flow__handle,
+.react-flow__node-input .react-flow__handle {
+  border: none;
+  background: transparent;
+}

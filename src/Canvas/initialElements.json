@@ -1,0 +1,227 @@
+[
+  {
+    "id": "ymjw82jsx6h",
+    "position": { "x": 0, "y": 0 },
+    "type": "SOURCE",
+    "elementType": "NODE",
+    "quantity": 515
+  },
+  {
+    "id": "cul4td0ml0f",
+    "position": { "x": 0, "y": 0 },
+    "type": "FACTORY",
+    "elementType": "NODE",
+    "quantity": 495
+  },
+  {
+    "id": "bnfq2jtryz9",
+    "position": { "x": 0, "y": 0 },
+    "type": "WAREHOUSE",
+    "elementType": "NODE",
+    "quantity": 151
+  },
+  {
+    "id": "iaijoj5ozc",
+    "position": { "x": 0, "y": 0 },
+    "type": "DC",
+    "elementType": "NODE",
+    "quantity": 33
+  },
+  {
+    "id": "8b0fj5lma18",
+    "position": { "x": 0, "y": 0 },
+    "type": "RETAILER",
+    "elementType": "NODE",
+    "quantity": 846
+  },
+  {
+    "id": "cdye4xebfzp",
+    "position": { "x": 0, "y": 0 },
+    "type": "RETAILER",
+    "elementType": "NODE",
+    "quantity": 116
+  },
+  {
+    "id": "migvrfjs64",
+    "position": { "x": 0, "y": 0 },
+    "type": "DC",
+    "elementType": "NODE",
+    "quantity": 382
+  },
+  {
+    "id": "hs20huou0mv",
+    "position": { "x": 0, "y": 0 },
+    "type": "DC",
+    "elementType": "NODE",
+    "quantity": 679
+  },
+  {
+    "id": "e761ysokd8m",
+    "position": { "x": 0, "y": 0 },
+    "type": "FACTORY",
+    "elementType": "NODE",
+    "quantity": 535
+  },
+  {
+    "id": "4o11l79i2lb",
+    "position": { "x": 0, "y": 0 },
+    "type": "FACTORY",
+    "elementType": "NODE",
+    "quantity": 1000
+  },
+  {
+    "id": "mv22e07ld4",
+    "position": { "x": 0, "y": 0 },
+    "type": "DC",
+    "elementType": "NODE",
+    "quantity": 468
+  },
+  {
+    "id": "554oez8cj86",
+    "position": { "x": 0, "y": 0 },
+    "type": "SOURCE",
+    "elementType": "NODE",
+    "quantity": 645
+  },
+  {
+    "id": "impjfg63lbg",
+    "position": { "x": 0, "y": 0 },
+    "type": "SOURCE",
+    "elementType": "NODE",
+    "quantity": 411
+  },
+  {
+    "id": "gygn63y11ma",
+    "position": { "x": 0, "y": 0 },
+    "type": "FACTORY",
+    "elementType": "NODE",
+    "quantity": 592
+  },
+  {
+    "id": "7jwuakibnw8",
+    "position": { "x": 0, "y": 0 },
+    "type": "RETAILER",
+    "elementType": "NODE",
+    "quantity": 443
+  },
+  {
+    "id": "e12",
+    "source": "ymjw82jsx6h",
+    "target": "cul4td0ml0f",
+    "elementType": "EDGE"
+  },
+  {
+    "id": "e23",
+    "source": "cul4td0ml0f",
+    "target": "bnfq2jtryz9",
+    "elementType": "EDGE"
+  },
+  {
+    "id": "e34",
+    "source": "bnfq2jtryz9",
+    "target": "iaijoj5ozc",
+    "elementType": "EDGE"
+  },
+  {
+    "id": "e45",
+    "source": "iaijoj5ozc",
+    "target": "8b0fj5lma18",
+    "elementType": "EDGE"
+  },
+  {
+    "id": "f9m7gnz85jk",
+    "source": "iaijoj5ozc",
+    "target": "cdye4xebfzp",
+    "elementType": "EDGE"
+  },
+  {
+    "id": "zxxoqdax2lm",
+    "source": "bnfq2jtryz9",
+    "target": "migvrfjs64",
+    "elementType": "EDGE"
+  },
+  {
+    "id": "11ivs3ucjh8",
+    "source": "migvrfjs64",
+    "target": "cdye4xebfzp",
+    "elementType": "EDGE"
+  },
+  {
+    "id": "yp3ho73k1d",
+    "source": "bnfq2jtryz9",
+    "target": "hs20huou0mv",
+    "elementType": "EDGE"
+  },
+  {
+    "id": "empkg9byli",
+    "source": "hs20huou0mv",
+    "target": "cdye4xebfzp",
+    "elementType": "EDGE"
+  },
+  {
+    "id": "qaowapzva5",
+    "source": "ymjw82jsx6h",
+    "target": "e761ysokd8m",
+    "elementType": "EDGE"
+  },
+  {
+    "id": "h56t9sbmac9",
+    "source": "e761ysokd8m",
+    "target": "bnfq2jtryz9",
+    "elementType": "EDGE"
+  },
+  {
+    "id": "sn62atizht",
+    "source": "ymjw82jsx6h",
+    "target": "4o11l79i2lb",
+    "elementType": "EDGE"
+  },
+  {
+    "id": "5ncuwq09wcc",
+    "source": "4o11l79i2lb",
+    "target": "bnfq2jtryz9",
+    "elementType": "EDGE"
+  },
+  {
+    "id": "3e6wrcimblh",
+    "source": "bnfq2jtryz9",
+    "target": "mv22e07ld4",
+    "elementType": "EDGE"
+  },
+  {
+    "id": "kx9pla3txp8",
+    "source": "mv22e07ld4",
+    "target": "8b0fj5lma18",
+    "elementType": "EDGE"
+  },
+  {
+    "id": "r2gz9jtd5",
+    "source": "554oez8cj86",
+    "target": "cul4td0ml0f",
+    "elementType": "EDGE"
+  },
+  {
+    "id": "04nd0hcbr33l",
+    "source": "impjfg63lbg",
+    "target": "e761ysokd8m",
+    "elementType": "EDGE"
+  },
+  {
+    "id": "5spxwp9dnc7",
+    "source": "ymjw82jsx6h",
+    "target": "gygn63y11ma",
+    "elementType": "EDGE"
+  },
+  {
+    "id": "y043uz6ih6f",
+    "source": "gygn63y11ma",
+    "target": "bnfq2jtryz9",
+    "elementType": "EDGE"
+  },
+  {
+    "id": "8ierwkmbec",
+    "source": "migvrfjs64",
+    "target": "7jwuakibnw8",
+    "elementType": "EDGE"
+  }
+]
